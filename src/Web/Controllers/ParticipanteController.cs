@@ -10,7 +10,7 @@ namespace Web.Controllers
     public class ParticipanteController : Controller
     {
         private readonly IClientApi clientApi;
-         private readonly IToastNotification toastNotification;
+        private readonly IToastNotification toastNotification;
 
         public ParticipanteController(IClientApi clientApi, IToastNotification toastNotification)
         {
@@ -18,7 +18,10 @@ namespace Web.Controllers
             this.toastNotification = toastNotification;
         }
 
-        public IActionResult Index => View();
+        public IActionResult Index()
+        {
+            return View();
+        }
 
         public async Task<IActionResult> Novo(Guid churrasId)
         {
@@ -38,7 +41,7 @@ namespace Web.Controllers
                 return View(nameof(Novo));
             }
             await clientApi.CriarParticipante(adicionarParticipanteNoChurrasViewModel);
-            this.toastNotification.AddSuccessToastMessage("Participante adicioado ao chirras com sucesso!");
+            this.toastNotification.AddSuccessToastMessage("Participante adicioado ao churras com sucesso!");
 
             return RedirectToAction(nameof(Index));
         }
