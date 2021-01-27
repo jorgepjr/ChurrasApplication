@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using NToastNotify;
 using Web.Interfaces;
 using Web.Models;
 
@@ -9,10 +10,12 @@ namespace Web.Controllers
     public class ParticipanteController : Controller
     {
         private readonly IClientApi clientApi;
+         private readonly IToastNotification toastNotification;
 
-        public ParticipanteController(IClientApi clientApi)
+        public ParticipanteController(IClientApi clientApi, IToastNotification toastNotification)
         {
             this.clientApi = clientApi;
+            this.toastNotification = toastNotification;
         }
 
         public IActionResult Index => View();
@@ -35,6 +38,7 @@ namespace Web.Controllers
                 return View(nameof(Novo));
             }
             await clientApi.CriarParticipante(adicionarParticipanteNoChurrasViewModel);
+            this.toastNotification.AddSuccessToastMessage("Participante adicioado ao chirras com sucesso!");
 
             return RedirectToAction(nameof(Index));
         }
@@ -46,6 +50,7 @@ namespace Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
             await clientApi.ExcluirParticipante(id);
+            this.toastNotification.AddWarningToastMessage("O participante foi removido da lista de contribuição");
 
             return RedirectToAction(nameof(Index));
         }

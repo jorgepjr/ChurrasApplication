@@ -11,22 +11,14 @@ namespace Web.Interfaces
         [Get("/churras")]
         Task<List<ChurrasViewModel>> ListarChurras();
 
-
         [Post("/churras")]
         Task CriarChurras(ChurrasViewModel churrasViewModel);
-
 
         [Get("/churras/{churrasId}")]
         Task<ChurrasViewModel> BuscarChurrasPorId(Guid churrasId);
 
-        [Get("/participante")]
-        Task<List<ParticipanteViewModel>> ListarParticipantes();
-
         [Post("/participante")]
         Task CriarParticipante(AdicionarParticipanteNoChurrasViewModel adicionarParticipanteNoChurrasViewModel);
-
-        // [Get("/participante/{id}")]
-        // Task<ParticipanteViewModel> BuscarParticipantePorId(Guid id);
 
         [Delete("/participante/{participanteId}")]
         Task ExcluirParticipante(Guid? participanteId);

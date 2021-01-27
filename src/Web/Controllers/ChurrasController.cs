@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using NToastNotify;
 using Web.Interfaces;
 using Web.Models;
 
@@ -11,10 +11,12 @@ namespace Web.Controllers
     public class ChurrasController : Controller
     {
         private readonly IClientApi clientApi;
+         private readonly IToastNotification toastNotification;
 
-        public ChurrasController(IClientApi clientApi)
+        public ChurrasController(IClientApi clientApi, IToastNotification toastNotification)
         {
             this.clientApi = clientApi;
+            this.toastNotification = toastNotification;
         }
 
         public async Task<IActionResult> Index()
@@ -39,6 +41,7 @@ namespace Web.Controllers
                 return View(nameof(Novo));
             }
             await clientApi.CriarChurras(churrasViewModel);
+            toastNotification.AddSuccessToastMessage("Churras criado com sucesso!");
 
             return RedirectToAction(nameof(Index));
         }
@@ -62,6 +65,7 @@ namespace Web.Controllers
         public async Task<IActionResult> Pagar(ContribuicaoViewModel contribuicaoViewModel)
         {
             await clientApi.PagarChurras(contribuicaoViewModel);
+            toastNotification.AddSuccessToastMessage("Sua contribuição foi registrada com sucesso!");
             return RedirectToAction(nameof(Index));
         }
     }
