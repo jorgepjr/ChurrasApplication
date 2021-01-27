@@ -1,0 +1,16 @@
+@model DetalharChurrasViewModel
+@{
+    ViewData["Title"] = "Detalhes do churras";
+}
+
+<h4>@Model.Descricao - Arrecadação: @ViewData["TotalArrecadado"]</h4>
+
+
+<ul>
+@foreach (var item in Model.ParticipanteViewModels)
+{
+    <li>
+@item.Nome ====> R$@item.ValorPago @(item.ComBebida ? " + Bebida " : "")
+    </li>
+}
+</ul>

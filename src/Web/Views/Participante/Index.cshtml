@@ -1,0 +1,9 @@
+@model ParticipanteViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<form asp-action="Buscar">
+    <input asp-for="Nome" />
+    <button>Buscar</button>
+</form>

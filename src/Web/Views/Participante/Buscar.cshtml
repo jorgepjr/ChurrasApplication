@@ -1,0 +1,35 @@
+@model ContribuicaoViewModel
+@{
+    ViewData["Title"] = "Buscar";
+}
+
+<div class="card card-body col-4">
+    <form asp-action="Pagar" asp-controller="Churras">
+        <input asp-for="ChurrasId" />
+        <input asp-for="ParticipanteId" />
+        <div class="form-group">
+            <label asp-for="NomeDoParticipante" class="font-weight-bold"></label>
+            <input type="text" asp-for="NomeDoParticipante" class="form-control">
+            <span class="text-danger" asp-validation-for="NomeDoParticipante"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ValorSugerido" class="font-weight-bold"></label>
+            <input type="text" asp-for="ValorSugerido" disabled class="form-control">
+        </div>
+
+         <div class="form-group">
+            <label asp-for="ComBebida" class="font-weight-bold"></label>
+            <input type="checkbox" asp-for="ComBebida">
+            <span class="text-danger" asp-validation-for="ComBebida"></span>
+        </div>
+
+          <div class="form-group">
+            <label asp-for="ValorPago" class="font-weight-bold"></label>
+            <input type="number" asp-for="ValorPago" class="form-control">
+            <span class="text-danger" asp-validation-for="ValorPago"></span>
+        </div>
+        <div class="from-group float-lg-right">
+            <button class="btn btn-primary" type="submit">Pagar</button>
+        </div>
+    </form>
+</div>

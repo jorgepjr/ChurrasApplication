@@ -1,0 +1,54 @@
+@model IEnumerable<ChurrasViewModel>
+    @{
+    ViewData["Title"] = "Agenda de Churras";
+    }
+
+<div class="form-group">
+    <a class="btn btn-outline-info btn-lg" asp-action="Novo" data-toggle="tooltip" title="Novo churras"><em class="fas fa-utensils"></em> Novo</a>
+</div>
+    <div class="card card-body mt-4">
+        @if (Model.Any())
+        {
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Evento</th>
+                    <th>Participantes</th>
+                    <th>Contribuição</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>@item.Data.ToString("dd/MM/yyyy")</td>
+                    <td>@item.Descricao</td>
+                    <td>@ViewData["Participantes"]</td>
+                    <td>@item.Descricao</td>
+                    <td>
+                        <div class="from-group">
+                            <a class="badge badge-info" asp-controller="Participante" asp-route-churrasId="@item.Id" asp-action="Novo" data-toggle="tooltip" title="Adicionar participante">
+                                <em class="fas fa-users"></em>
+                            </a>
+                            <a class="badge badge-secondary" asp-action="Detalhes" asp-route-churrasId="@item.Id" data-toggle="tooltip" title="Detalhes"><em class="fas fa-eye"></em></a>
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        }
+        else
+        {
+        <div class="alert alert-primary">
+            <h3>Nenhum cadastro existente!</h3>
+        </div>
+        }
+    </div>
+
+    @section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    }

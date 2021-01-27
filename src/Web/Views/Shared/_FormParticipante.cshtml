@@ -1,0 +1,20 @@
+@model ParticipanteViewModel
+
+<div class="card card-body col-4">
+    <form asp-action="Salvar">
+        <input asp-for="ChurrasId" />
+        <div class="form-group">
+            <label asp-for="Nome" class="font-weight-bold"></label>
+            <input type="text" asp-for="Nome" class="form-control">
+            <span class="text-danger" asp-validation-for="Nome"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ValorSugerido" class="font-weight-bold"></label>
+            <input type="text" asp-for="ValorSugerido" class="form-control">
+            <span class="text-danger" asp-validation-for="ValorSugerido"></span>
+        </div>
+        <div class="from-group float-lg-right">
+            <button class="btn btn-primary" type="submit">Salvar</button>
+        </div>
+    </form>
+</div>
